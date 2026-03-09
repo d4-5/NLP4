@@ -1,0 +1,32 @@
+{"id":"DATE_001","raw_text":"Договір підписано 25.05.2011 року.","field_type":"DATE","expected_behavior":"має витягнути DATE 25.05.2011 і нормалізувати до 2011-05-25"}
+{"id":"DATE_002","raw_text":"Експертиза від 08.07.2014.","field_type":"DATE","expected_behavior":"має витягнути DATE без крапки в кінці span"}
+{"id":"DATE_003","raw_text":"Постанова від 31.10.2007 р. набрала чинності.","field_type":"DATE","expected_behavior":"має витягнути DATE попри суфікс р."}
+{"id":"DATE_004","raw_text":"Провадження № 12016100000000042 від 27.01.2016 року.","field_type":"DATE","expected_behavior":"має витягнути DATE окремо від DOC_ID"}
+{"id":"DATE_005","raw_text":"Кабмін прийняв рішення 10/04/2008 №610.","field_type":"DATE","expected_behavior":"має витягнути DATE з роздільником /"}
+{"id":"DATE_006","raw_text":"Дата зустрічі 2016 поки не уточнена.","field_type":"DATE","expected_behavior":"не вважати ізольований рік DATE"}
+{"id":"DATE_007","raw_text":"Число 3.14 не є календарною датою.","field_type":"DATE","expected_behavior":"не вважати 3.14 DATE"}
+{"id":"DATE_008","raw_text":"План: 1. підготовка, 2. запуск, 3. контроль.","field_type":"DATE","expected_behavior":"не вважати нумерацію списку DATE"}
+{"id":"DATE_009","raw_text":"У звіті вказано 32.01.2020 як тестове значення.","field_type":"DATE","expected_behavior":"не витягувати невалідну дату"}
+{"id":"DATE_010","raw_text":"Термін до 00.12.2024 є помилковим.","field_type":"DATE","expected_behavior":"не витягувати невалідну дату з нульовим днем"}
+
+{"id":"AMOUNT_001","raw_text":"Становить 1218 гривень за звітний період.","field_type":"AMOUNT","expected_behavior":"має витягнути AMOUNT value=1218.0 currency=UAH"}
+{"id":"AMOUNT_002","raw_text":"Ми сплатили 800 грн за послугу.","field_type":"AMOUNT","expected_behavior":"має витягнути AMOUNT з валютою UAH"}
+{"id":"AMOUNT_003","raw_text":"Бюджет проєкту — 500 доларів.","field_type":"AMOUNT","expected_behavior":"має витягнути AMOUNT з валютою USD"}
+{"id":"AMOUNT_004","raw_text":"Вартість склала $100 за консультацію.","field_type":"AMOUNT","expected_behavior":"має витягнути AMOUNT із символом $"}
+{"id":"AMOUNT_005","raw_text":"Очікувана сума 1 250,50 грн.","field_type":"AMOUNT","expected_behavior":"має витягнути AMOUNT і нормалізувати число до 1250.5"}
+{"id":"AMOUNT_006","raw_text":"Знижка становить 100% для ветеранів.","field_type":"AMOUNT","expected_behavior":"не вважати 100% грошовою сумою"}
+{"id":"AMOUNT_007","raw_text":"Він отримав 500 і одразу пішов.","field_type":"AMOUNT","expected_behavior":"не витягувати число без маркера валюти"}
+{"id":"AMOUNT_008","raw_text":"У 2014 році відкрили новий офіс.","field_type":"AMOUNT","expected_behavior":"не вважати рік AMOUNT"}
+{"id":"AMOUNT_009","raw_text":"Пункт № 24 затверджено одноголосно.","field_type":"AMOUNT","expected_behavior":"не вважати №24 сумою"}
+{"id":"AMOUNT_010","raw_text":"Середній приріст 12,5% щомісяця.","field_type":"AMOUNT","expected_behavior":"не вважати відсоток AMOUNT"}
+
+{"id":"DOC_001","raw_text":"Наказ № 859 набирає чинності з моменту підписання.","field_type":"DOC_ID","expected_behavior":"має витягнути DOC_ID value=859 type=ORDER_ID"}
+{"id":"DOC_002","raw_text":"Кримінальне провадження № 12016100000000042 відкрито у січні.","field_type":"DOC_ID","expected_behavior":"має витягнути DOC_ID як CASE_ID"}
+{"id":"DOC_003","raw_text":"Розпорядження №610 стосується надрокористування.","field_type":"DOC_ID","expected_behavior":"має витягнути DOC_ID із контекстом розпорядження"}
+{"id":"DOC_004","raw_text":"Договір №3 було укладено у травні.","field_type":"DOC_ID","expected_behavior":"має витягнути DOC_ID із контекстом договору"}
+{"id":"DOC_005","raw_text":"Ухвала № АБ-12/7 оприлюднена в реєстрі.","field_type":"DOC_ID","expected_behavior":"має витягнути DOC_ID з буквено-цифровим форматом"}
+{"id":"DOC_006","raw_text":"У таборі № 36 у Кучино він відбував термін.","field_type":"DOC_ID","expected_behavior":"не вважати номер табору DOC_ID"}
+{"id":"DOC_007","raw_text":"(Відомості ВРУ, 1997 р., № 24, ст. 170)","field_type":"DOC_ID","expected_behavior":"не витягувати номер випуску без сильного контексту документа"}
+{"id":"DOC_008","raw_text":"Список покупок: № 1 хліб, № 2 молоко.","field_type":"DOC_ID","expected_behavior":"не вважати нумерацію списку DOC_ID"}
+{"id":"DOC_009","raw_text":"Він сказав просто № 55 і пішов.","field_type":"DOC_ID","expected_behavior":"не витягувати DOC_ID без контекстного якоря"}
+{"id":"DOC_010","raw_text":"Стаття 12, частина 3, пункт 2.","field_type":"DOC_ID","expected_behavior":"не витягувати посилання на статтю як DOC_ID"}
