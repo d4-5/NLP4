@@ -1,0 +1,21 @@
+{
+  "seed": 42,
+  "strategy": "stratified",
+  "ratios": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1
+  },
+  "sizes": {
+    "train": 8929,
+    "val": 1116,
+    "test": 1116
+  },
+  "generated_at": "2026-03-16T15:46:08.357452+00:00",
+  "columns": {
+    "id_col": "text_id",
+    "stratify_col": "dominant_label",
+    "group_col": null,
+    "time_col": null
+  }
+}
