@@ -23,3 +23,17 @@
 - Split: стратифікований випадковий за домінантним типом сутності на `text_id` (seed=42, 80/10/10).
 - Точні дублі між сплітами існують (train∩val=11, train∩test=5, val∩test=4) — ризик завищення метрик.
 - Майже‑дублі (TF‑IDF cosine ≥0.95) присутні: train↔test=91 пар, train↔val=256 пар.
+
+# Lab 6 — classification baseline
+- Task: класифікація `text_id` за домінантним типом сутності (`dominant_label` з `labels.csv`, `NO_ENTITY` якщо без сутностей).
+- Features: `processed_v2` (`text_clean`), TF-IDF word n-grams (1,1) / (1,2), sublinear TF.
+- Models: Logistic Regression baseline (2 варіанти для порівняння).
+- Основні ризики: дисбаланс класів (`NO_ENTITY`), overlap між типами сутностей, шумна/неповна розмітка, дублікати між сплітами, трансліт/сленг.
+
+# Lab 7 — Linear SVM + char-ngrams
+- Imbalance є вираженим: у train `NO_ENTITY=4657`, а хвіст класів дуже малий (`TIME=7`, `PCT=31`, `DOC=38`, `QUANT=45`).
+- Noisy text / name variation справді важливі: у помилках часто з'являються лапки, варіативні назви, змішані формати токенів і контексти з близькими сигналами.
+- Char-ngrams допомогли: найкращий char-based варіант на validation дав `macro-F1=0.3906` проти `0.3432` для word-only SVM.
+- `class_weight="balanced"` теж допоміг: для `word(1,2)+char_wb(3,5)` validation `macro-F1` зріс з `0.3906` до `0.4616`, а test `macro-F1` з `0.3877` до `0.4332`.
+- Найпроблемніший клас за абсолютною кількістю помилок - `PERS`, бо baseline часто зводив його до `NO_ENTITY`; найнестабільніший tail-клас - `TIME`, бо у validation є лише 1 приклад.
+- Для precision/recall компромісу виявилась доречною recall-first логіка для рідкісного класу `PERIOD`: custom threshold `-0.6706` підняв його recall на test з `0.1818` до `0.6364`, але зменшив recall `NO_ENTITY`.
