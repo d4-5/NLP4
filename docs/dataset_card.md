@@ -59,3 +59,10 @@
 - Найпроблемнішими виявилися доменні `ORG` з юридичними формами (`ТОВ`, `ПАТ`, `ДП`, `ГО`) і довгі назви установ, де часто з'являються boundary errors.
 - Hybrid rules дали відчутний виграш у coverage для `DATE`/`MON` і допомогли краще витягувати частину доменних `ORG`.
 - Залишкові типи помилок: boundary, type confusion (`ORG` vs `LOC`), missed domain entity, tokenization / normalization noise.
+
+# Lab 11 — schema-first LLM extraction
+- Для structured extraction протестовано кейс `document_id` + `document_type` + `date_iso` + `date_text` + `amount_value` + `amount_currency`.
+- Корпус містить і явні, і неявні сигнали: суми та дати часто виражені явно, а `document_type` або релевантність `№...` іноді треба інтерпретувати з контексту.
+- Складні випадки: юридичні фрагменти з кількома датами, короткі `№15`/`№610`, змішані date-only та amount-only тексти, а також приклади, де модель галюцинує документ замість `null`.
+- LLM extraction виглядає життєздатним саме як pipeline, а не як одиночний prompt: на eval set `raw valid JSON rate=70%`, `post-repair valid JSON rate=100%`.
+- Schema-first підхід дав стабільний structured output, але semantic exact match лишився низьким (`25%`), тож валідація структури не замінює змістовної перевірки.
