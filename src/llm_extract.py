@@ -7,7 +7,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-import requests
+try:
+    import requests
+except ModuleNotFoundError:  # pragma: no cover - handled at runtime for lightweight imports.
+    requests = None
 
 from src.json_schema import EXTRACTION_TASK_NAME, SCHEMA_VERSION, schema_as_pretty_json, schema_rules_text
 from src.validator import ValidationResult, validate_output
@@ -98,6 +101,9 @@ def groq_chat_completion(
     timeout: int = 60,
     max_retries: int = 5,
 ) -> tuple[str, dict[str, Any] | None]:
+    if requests is None:
+        raise RuntimeError("requests is not installed. Run: pip install -r labs/lab13/requirements.txt")
+
     api_key = os.getenv("GROQ_API_KEY")
     if not api_key:
         raise RuntimeError("GROQ_API_KEY environment variable is not set")

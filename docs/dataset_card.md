@@ -66,3 +66,11 @@
 - Складні випадки: юридичні фрагменти з кількома датами, короткі `№15`/`№610`, змішані date-only та amount-only тексти, а також приклади, де модель галюцинує документ замість `null`.
 - LLM extraction виглядає життєздатним саме як pipeline, а не як одиночний prompt: на eval set `raw valid JSON rate=70%`, `post-repair valid JSON rate=100%`.
 - Schema-first підхід дав стабільний structured output, але semantic exact match лишився низьким (`25%`), тож валідація структури не замінює змістовної перевірки.
+
+# Lab 13 — multi-agent crew
+- Multi-agent use case: той самий document signal extraction, але через workflow `Triager -> Extractor -> Reviewer -> Repair/Fallback`.
+- Test inputs: прості юридичні тексти, missing-field кейси, ambiguous short IDs, relative dates, hallucination-prone тексти, noisy/typo фрагменти, repair і manual-review кейси.
+- Очікувані типи помилок: wrong route, missed field, hallucinated document id, invalid JSON, reviewer false alarm, fallback failure.
+- Fallback потрібен для коротких document IDs, noisy дат/сум, schema errors і випадків, де reviewer знаходить contradiction із source text.
+- Multi-agent підхід має покращити контрольованість: reviewer ловить semantic risks, а fallback повертає partial/manual-review output замість вигаданого значення.
+- Підхід надлишковий для дуже простих date-only або amount-only текстів, де rule-based extraction уже достатньо стабільний.
