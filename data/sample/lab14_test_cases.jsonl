@@ -1,0 +1,10 @@
+{"case_id": "case_001", "input": "Переказати 500 грн на Monobank завтра", "expected_route": "finance_extraction", "note": "Happy path"}
+{"case_id": "case_002", "input": "Оплатити рахунок 12345", "expected_route": "finance_extraction", "note": "Missing amount/currency"}
+{"case_id": "case_003", "input": "Сьогодні гарна погода для прогулянки", "expected_route": "manual_review_route", "note": "Unknown route / irrelevant text"}
+{"case_id": "case_004", "input": "Відправ 1000 на карту 4444555566667777", "expected_route": "finance_extraction", "note": "Standard transfer"}
+{"case_id": "case_005", "input": "Договір №987 від 12 травня 2024 року", "expected_route": "document_signal_schema", "note": "Document ID extraction"}
+{"case_id": "case_006", "input": "Надіслати кошти без вказання суми", "expected_route": "finance_extraction", "note": "Ambiguous extraction (missing amount)"}
+{"case_id": "case_007", "input": "!!!! @@@@ $$$$", "expected_route": "manual_review_route", "note": "Noisy input / Junk"}
+{"case_id": "case_008", "input": "Купити хліб за 25 грн та молоко за 40 грн", "expected_route": "finance_extraction", "note": "Multiple amounts (Ambiguous)"}
+{"case_id": "case_009", "input": " ", "expected_route": "failed", "note": "Empty input"}
+{"case_id": "case_010", "input": "Переказ 100 USD на PayPal", "expected_route": "finance_extraction", "note": "International currency"}
